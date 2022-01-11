@@ -1,0 +1,30 @@
+#!/bin/bash
+
+
+#Simple web server install
+
+echo "Downloading package information from all configured sources"
+apt update
+
+#Check if apache2 is installed and install if needed
+if service --status-all | grep -Fq 'apache2';
+then
+        echo "Apache already installed"
+else
+        echo "Installing apache2"
+        apt install apache2 -y
+        echo "Installed"
+fi
+echo "Done"
+
+echo "Copy content"
+cat << EOF > /var/www/html/index.html
+<html>
+<head>
+  <title> Ubuntu rocks! </title>
+</head>
+<body>
+  <p> I'm running this website on an Ubuntu Server server!
+</body>
+</html>
+EOF
