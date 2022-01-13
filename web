@@ -2,7 +2,14 @@
 
 
 #Simple web server install
-
+# Checking for exact version input
+#Reading versions to array
+#Choose what packet to install
+PACKET_NAME=$1
+readarray versions < <(apt list $PACKET_NAME --all-versions)
+if [ -z $* ]
+then
+VERSION=
 echo "Downloading package information from all configured sources"
 apt update
 
